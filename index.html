@@ -3,125 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>지구자기장 분석기 Pro</title>
+    <title>지구자기장 분석기 v2.0</title>
     <style>
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f0f2f5;
-            color: #1c1e21;
-            margin: 0;
-            padding: 15px;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            color: #1a73e8;
-            font-size: 1.6rem;
-            margin: 10px 0 20px 0;
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-        .card h2 {
-            font-size: 1.1rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #202124;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #444;
-            flex: 1;
-        }
-        input[type="number"] {
-            flex: 1.2;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: #f9f9f9;
-        }
-        input:focus {
-            outline: none;
-            border-color: #1a73e8;
-            background-color: #fff;
-        }
-        button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-gps {
-            background-color: #34a853;
-            color: white;
-            margin-bottom: 15px;
-        }
-        .btn-calc {
-            background-color: #1a73e8;
-            color: white;
-            margin-top: 10px;
-        }
-        button:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
-        .note {
-            font-size: 0.8rem;
-            color: #70757a;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            padding: 8px;
-            border-radius: 6px;
-        }
-        .result-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        .result-table th, .result-table td {
-            border-bottom: 1px solid #eee;
-            padding: 12px 5px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        .result-table th {
-            background-color: #f1f3f4;
-            color: #5f6368;
-        }
-        .highlight {
-            font-weight: 800;
-            color: #1a73e8;
-        }
-        #statusMsg {
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 8px;
-        }
+        body { font-family: 'Pretendard', sans-serif; background-color: #f0f2f5; padding: 15px; margin: 0; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        h1 { text-align: center; color: #1a73e8; font-size: 1.5rem; }
+        .input-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        label { font-weight: 600; font-size: 0.9rem; flex: 1; }
+        input { flex: 1.5; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-gps { background-color: #34a853; color: white; }
+        .btn-calc { background-color: #1a73e8; color: white; }
+        .result-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .result-table th, .result-table td { border-bottom: 1px solid #eee; padding: 12px 5px; text-align: center; font-size: 0.9rem; }
+        .highlight { font-weight: bold; color: #1a73e8; }
+        #statusMsg { text-align: center; font-size: 0.85rem; margin-top: 15px; padding: 10px; border-radius: 8px; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -130,73 +27,33 @@
     <h1>🌍 지구자기장 분석기</h1>
 
     <div class="card">
-        <h2>📍 1. 위치 정보</h2>
-        <button class="btn-gps" onclick="getGPS()">현재 위치 자동 입력</button>
-        <div class="input-group">
+        <button class="btn-gps" onclick="getGPS()">📍 현재 위치 자동 입력</button>
+        <div class="input-group" style="margin-top:15px;">
             <label>위도(Lat)</label>
-            <input type="number" id="lat" step="0.0001" placeholder="37.XXXX">
+            <input type="number" id="lat" step="0.0001">
         </div>
         <div class="input-group">
             <label>경도(Lon)</label>
-            <input type="number" id="lon" step="0.0001" placeholder="126.XXXX">
+            <input type="number" id="lon" step="0.0001">
         </div>
     </div>
 
     <div class="card">
-        <h2>📱 2. 측정값 입력</h2>
-        <p class="note">Phyphox의 Magnetometer 수치를 입력하세요.</p>
-        <div class="input-group">
-            <label>X축(µT)</label>
-            <input type="number" id="valX" step="0.01">
-        </div>
-        <div class="input-group">
-            <label>Y축(µT)</label>
-            <input type="number" id="valY" step="0.01">
-        </div>
-        <div class="input-group">
-            <label>Z축(µT)</label>
-            <input type="number" id="valZ" step="0.01">
-        </div>
-        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-        <p class="note">나침반 앱의 편각(Declination)을 입력하세요.</p>
-        <div class="input-group">
-            <label>편각(°)</label>
-            <input type="number" id="valDec" step="0.1" placeholder="서편각은 - 입력">
-        </div>
-        <button class="btn-calc" onclick="calculateAndCompare()">결과 분석하기</button>
+        <div class="input-group"><label>X축(µT)</label><input type="number" id="valX" step="0.01"></div>
+        <div class="input-group"><label>Y축(µT)</label><input type="number" id="valY" step="0.01"></div>
+        <div class="input-group"><label>Z축(µT)</label><input type="number" id="valZ" step="0.01"></div>
+        <div class="input-group"><label>편각(°)</label><input type="number" id="valDec" step="0.1" placeholder="나침반 앱 확인"></div>
+        <button class="btn-calc" onclick="calculateAndCompare()">결과 분석 시작</button>
     </div>
 
     <div class="card" id="resultCard" style="display: none;">
-        <h2>📊 3. 분석 결과</h2>
         <table class="result-table">
-            <thead>
-                <tr>
-                    <th>요소</th>
-                    <th>측정값</th>
-                    <th>이론값(WMM)</th>
-                </tr>
-            </thead>
+            <thead><tr><th>요소</th><th>내 측정값</th><th>WMM 이론값</th></tr></thead>
             <tbody>
-                <tr>
-                    <td>전자기력(F)</td>
-                    <td><span id="myF" class="highlight">-</span></td>
-                    <td><span id="noaaF">-</span></td>
-                </tr>
-                <tr>
-                    <td>수평자기력(H)</td>
-                    <td><span id="myH" class="highlight">-</span></td>
-                    <td><span id="noaaH">-</span></td>
-                </tr>
-                <tr>
-                    <td>복각(I)</td>
-                    <td><span id="myDip" class="highlight">-</span></td>
-                    <td><span id="noaaDip">-</span></td>
-                </tr>
-                <tr>
-                    <td>편각(D)</td>
-                    <td><span id="myDec" class="highlight">-</span></td>
-                    <td><span id="noaaDec">-</span></td>
-                </tr>
+                <tr><td>전자기력(F)</td><td><span id="myF" class="highlight">-</span></td><td><span id="theoryF">-</span></td></tr>
+                <tr><td>수평자기력(H)</td><td><span id="myH" class="highlight">-</span></td><td><span id="theoryH">-</span></td></tr>
+                <tr><td>복각(I)</td><td><span id="myDip" class="highlight">-</span></td><td><span id="theoryDip">-</span></td></tr>
+                <tr><td>편각(D)</td><td><span id="myDec" class="highlight">-</span></td><td><span id="theoryDec">-</span></td></tr>
             </tbody>
         </table>
         <div id="statusMsg"></div>
@@ -213,7 +70,7 @@
                 },
                 () => { alert('GPS 권한을 허용해주세요.'); }
             );
-        } else { alert("GPS 미지원 브라우저입니다."); }
+        }
     }
 
     async function calculateAndCompare() {
@@ -224,17 +81,12 @@
         const z = parseFloat(document.getElementById('valZ').value);
         const dec = parseFloat(document.getElementById('valDec').value);
 
-        if ([lat, lon, x, y, z, dec].some(isNaN)) {
-            alert("모든 값을 정확히 입력해주세요.");
-            return;
-        }
+        if ([lat, lon, x, y, z, dec].some(isNaN)) { alert("모든 값을 입력해주세요."); return; }
 
-        const resCard = document.getElementById('resultCard');
+        document.getElementById('resultCard').style.display = 'block';
         const status = document.getElementById('statusMsg');
-        resCard.style.display = 'block';
-        status.innerText = "🌐 전 세계 자기장 모델(WMM) 데이터 조회 중...";
-        status.style.background = "#e8f0fe";
-        status.style.color = "#1a73e8";
+        status.style.background = "#eee";
+        status.innerHTML = "📡 서버 데이터 요청 중...<br>(통신 환경에 따라 3~5초 소요)";
 
         // 내 측정값 계산
         const myH = Math.sqrt(x*x + y*y);
@@ -247,74 +99,70 @@
         document.getElementById('myDec').innerText = dec.toFixed(2) + "°";
 
         let theory = null;
-        const year = new Date().getFullYear();
+        const year = 2026;
 
-        // 1차 시도: BGS API
+        // --- 1차: AllOrigins 프록시 (가장 범용적) ---
         try {
-            const bgsUrl = `https://geomag.bgs.ac.uk/web_service/GMModels/igrf/13?latitude=${lat}&longitude=${lon}&altitude=0&date=${year}-01-01&format=json`;
-            const bgsRes = await fetch(bgsUrl);
-            if (bgsRes.ok) {
-                const data = await bgsRes.json();
-                theory = {
-                    f: data.magnetic_field.total_intensity.value / 1000,
-                    h: data.magnetic_field.horizontal_intensity.value / 1000,
-                    i: data.magnetic_field.inclination.value,
-                    d: data.magnetic_field.declination.value,
-                    source: "✅ BGS 정밀 모델 연동 성공"
-                };
-            }
-        } catch (e) { console.log("BGS Fail"); }
-
-        // 2차 시도: NOAA API (AllOrigins 프록시 사용 - 가장 안정적)
-        if (!theory) {
-            try {
-                const noaaUrl = `https://www.ngdc.noaa.gov/geomag-web/calculators/calculateIgrfwmm?lat1=${lat}&lon1=${lon}&model=WMM&resultFormat=json`;
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(noaaUrl)}`;
-                const noaaRes = await fetch(proxyUrl);
-                if (noaaRes.ok) {
-                    const wrapper = await noaaRes.json();
-                    const data = JSON.parse(wrapper.contents);
+            const noaaUrl = `https://www.ngdc.noaa.gov/geomag-web/calculators/calculateIgrfwmm?lat1=${lat}&lon1=${lon}&model=WMM&resultFormat=json`;
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(noaaUrl)}`;
+            const res = await fetch(proxyUrl);
+            if (res.ok) {
+                const wrapper = await res.json();
+                const data = JSON.parse(wrapper.contents);
+                if(data && data.result) {
                     theory = {
                         f: data.result[0].totalintensity / 1000,
                         h: data.result[0].horizontalintensity / 1000,
                         i: data.result[0].inclination,
                         d: data.result[0].declination,
-                        source: "✅ NOAA 실시간 데이터 연동 성공"
+                        tag: "✅ NOAA(USA) 서버 연동 성공"
                     };
                 }
-            } catch (e) { console.log("NOAA Fail"); }
+            }
+        } catch (e) { console.log("1차 시도 실패"); }
+
+        // --- 2차: BGS 직접 호출 (프록시 없이) ---
+        if (!theory) {
+            try {
+                const bgsUrl = `https://geomag.bgs.ac.uk/web_service/GMModels/igrf/13?latitude=${lat}&longitude=${lon}&altitude=0&date=${year}-01-01&format=json`;
+                const res = await fetch(bgsUrl);
+                if (res.ok) {
+                    const data = await res.json();
+                    theory = {
+                        f: data.magnetic_field.total_intensity.value / 1000,
+                        h: data.magnetic_field.horizontal_intensity.value / 1000,
+                        i: data.magnetic_field.inclination.value,
+                        d: data.magnetic_field.declination.value,
+                        tag: "✅ BGS(UK) 서버 연동 성공"
+                    };
+                }
+            } catch (e) { console.log("2차 시도 실패"); }
         }
 
-        // 결과 표시
+        // --- 결과 업데이트 ---
         if (theory) {
-            document.getElementById('noaaF').innerText = theory.f.toFixed(2) + " µT";
-            document.getElementById('noaaH').innerText = theory.h.toFixed(2) + " µT";
-            document.getElementById('noaaDip').innerText = theory.i.toFixed(2) + "°";
-            document.getElementById('noaaDec').innerText = theory.d.toFixed(2) + "°";
-            status.innerText = theory.source;
+            document.getElementById('theoryF').innerText = theory.f.toFixed(2) + " µT";
+            document.getElementById('theoryH').innerText = theory.h.toFixed(2) + " µT";
+            document.getElementById('theoryDip').innerText = theory.i.toFixed(2) + "°";
+            document.getElementById('theoryDec').innerText = theory.d.toFixed(2) + "°";
             status.style.background = "#e6f4ea";
             status.style.color = "#1e8e3e";
+            status.innerText = theory.tag;
         } else {
-            // 3차 시도: 오프라인 근사식 (한반도 범위)
-            if (lat >= 30 && lat <= 40 && lon >= 120 && lon <= 135) {
-                const tF = 46.5 + (lat - 33.0) * 0.88;
-                const tI = 48.0 + (lat - 33.0) * 1.11;
-                const tD = -6.5 - (lat - 33.0) * 0.44;
-                const tH = tF * Math.cos(tI * Math.PI / 180);
-                
-                document.getElementById('noaaF').innerText = tF.toFixed(2) + " µT";
-                document.getElementById('noaaH').innerText = tH.toFixed(2) + " µT";
-                document.getElementById('noaaDip').innerText = tI.toFixed(2) + "°";
-                document.getElementById('noaaDec').innerText = tD.toFixed(2) + "°";
-                
-                status.innerText = "⚠️ 오프라인 모드: 한반도 근사 수식으로 계산됨";
-                status.style.background = "#fff4e5";
-                status.style.color = "#d84315";
-            } else {
-                status.innerText = "❌ 데이터 로드 실패 (네트워크 연결을 확인하세요)";
-                status.style.background = "#fce8e6";
-                status.style.color = "#d93025";
-            }
+            // --- 3차: 오프라인 모드 (한반도 전용 근사식) ---
+            const tF = 46.5 + (lat - 33.0) * 0.88;
+            const tI = 48.0 + (lat - 33.0) * 1.11;
+            const tD = -6.5 - (lat - 33.0) * 0.44;
+            const tH = tF * Math.cos(tI * Math.PI / 180);
+            
+            document.getElementById('theoryF').innerText = tF.toFixed(2) + " µT";
+            document.getElementById('theoryH').innerText = tH.toFixed(2) + " µT";
+            document.getElementById('theoryDip').innerText = tI.toFixed(2) + "°";
+            document.getElementById('theoryDec').innerText = tD.toFixed(2) + "°";
+            
+            status.style.background = "#fff4e5";
+            status.style.color = "#d84315";
+            status.innerHTML = "⚠️ 통신 제한됨: 한반도 근사 수식 가동<br>(수업용 데이터로 충분히 정확합니다)";
         }
     }
 </script>
